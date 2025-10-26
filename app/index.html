@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue-Green Deployment Demo</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Blue-Green Deployment</h1>
+            <p>Jenkins + Kubernetes Zero-Downtime Deployment Strategy</p>
+        </div>
+
+        <div class="content">
+            <div class="environments">
+                <div class="environment blue-env" id="blueEnv">
+                    <div class="environment-icon">🔵</div>
+                    <h2>Blue</h2>
+                    <div class="version" id="blueVersion">Version 1.0</div>
+                    <p>Production Environment</p>
+                    <div class="status active" id="blueStatus">ACTIVE - 100% Traffic</div>
+                </div>
+
+                <div class="environment green-env" id="greenEnv">
+                    <div class="environment-icon">🟢</div>
+                    <h2>Green</h2>
+                    <div class="version" id="greenVersion">Version 1.0</div>
+                    <p>Staging Environment</p>
+                    <div class="status standby" id="greenStatus">STANDBY - 0% Traffic</div>
+                </div>
+            </div>
+
+            <div class="info-text">
+                Click "Deploy New Version" to deploy version 2.0 to the standby environment,<br>
+                then "Switch Traffic" to route users to the new version instantly.
+            </div>
+
+            <div class="traffic-bar">
+                <div class="blue-traffic traffic-fill" id="blueTraffic" style="width: 100%;">
+                    <span id="bluePercent">100%</span>
+                </div>
+                <div class="green-traffic traffic-fill" id="greenTraffic" style="width: 0%;">
+                    <span id="greenPercent"></span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="deploy-btn" onclick="deployNewVersion()">Deploy New Version</button>
+                <button class="switch-btn" onclick="switchTraffic()" id="switchBtn">Switch Traffic</button>
+            </div>
+
+            <div class="message" id="message">
+                Ready to deploy! Blue environment is currently serving all production traffic.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

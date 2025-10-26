@@ -1,0 +1,206 @@
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            max-width: 900px;
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        .environments {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .environment {
+            flex: 1;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .blue-env {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .green-env {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+
+        .environment h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .environment-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .version {
+            font-size: 1.2em;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .active {
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid white;
+        }
+
+        .standby {
+            background: rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .traffic-bar {
+            width: 100%;
+            height: 60px;
+            background: #f0f0f0;
+            border-radius: 30px;
+            margin: 40px 0;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .traffic-fill {
+            height: 100%;
+            transition: all 1s ease;
+            display: flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .blue-traffic {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .green-traffic {
+            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+            right: 0;
+            left: auto;
+        }
+
+        .controls {
+            text-align: center;
+        }
+
+        button {
+            padding: 18px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .switch-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .deploy-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 1.3em;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            color: #333;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .switching {
+            animation: pulse 0.5s ease-in-out 3;
+        }
+
+        .info-text {
+            text-align: center;
+            color: #666;
+            font-size: 1.1em;
+            margin: 30px 0;
+            line-height: 1.6;
+        }
+    </style>
