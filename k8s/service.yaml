@@ -1,12 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: my-blue-green-service
 spec:
   type: LoadBalancer
   selector:
-    app: nginx
-    version: blue   # Switch this to "green" to deploy green version
+    app: my-blue-green-site
+    version: blue
   ports:
-  - port: 80
-    targetPort: 80
+    - protocol: TCP
+      port: 80
+      targetPort: 80

@@ -1,21 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-blue
+  name: my-blue-green-deployment
+  labels:
+    app: my-blue-green-site
+    version: blue
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: nginx
+      app: my-blue-green-site
       version: blue
   template:
     metadata:
       labels:
-        app: nginx
+        app: my-blue-green-site
         version: blue
     spec:
       containers:
-      - name: nginx
-        image: ujwalnagrikar/my-blue-green-site:latest
-        ports:
-        - containerPort: 80
+        - name: my-blue-green-container
+          image: asia-south1-docker.pkg.dev/my-gcp-learning-474617/blue-green-deployment
+          ports:
+            - containerPort: 80

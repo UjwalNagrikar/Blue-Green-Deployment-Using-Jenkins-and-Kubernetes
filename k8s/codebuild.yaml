@@ -1,0 +1,25 @@
+steps:
+  # Step 1: Build Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'asia-south1-docker.pkg.dev/my-gcp-learning-474617/blue-green/my-blue-green-site:latest', '.']
+
+  # Step 2: Push to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia-south1-docker.pkg.dev/my-gcp-learning-474617/blue-green/my-blue-green-site:latest']
+
+  # Step 3: Deploy to GKE
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args:
+      [
+        'apply',
+        '-f',
+        'k8s/deployment.yaml'
+      ]
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-south1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=gke-cluster'
+
+images:
+  - 'asia-south1-docker.pkg.dev/my-gcp-learning-474617/blue-green-deployment'
+
+
