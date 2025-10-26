@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: your-dockerhub-username/my-nginx-site:green
+        image: ujwalnagrikar/my-blue-green-site:latest
         ports:
         - containerPort: 80

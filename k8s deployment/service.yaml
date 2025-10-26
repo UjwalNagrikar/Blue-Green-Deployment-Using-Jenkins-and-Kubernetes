@@ -6,7 +6,7 @@ spec:
   type: LoadBalancer
   selector:
     app: nginx
-    version: blue   # change to 'green' for blue-green switch
+    version: blue   # Switch this to "green" to deploy green version
   ports:
   - port: 80
     targetPort: 80
