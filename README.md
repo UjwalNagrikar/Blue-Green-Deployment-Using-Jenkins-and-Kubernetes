@@ -466,17 +466,17 @@ For issues and questions:
 - The open-source community
 
 ---
+## 📸 Screenshots
 
-## 📸 Project Screenshots
 
 ### 🧱 Cloud Build Pipeline
-![Cloud Build](images/code-build.png)
+![Cloud Build](image/code-build.png)
 
 ### ☸️ GKE Deployment
-![GKE Deployment](images/gks.png)
+![GKE Deployment](image/gks.png)
 
 ### 🏗️ Project Architecture
-![Project Architecture](images/projec-architure.png)
+![Project Architecture](image/projec-architure.png)
 
 
 **Built with ❤️ for cloud-native deployments**
