@@ -1,13 +1,11 @@
 steps:
-  # Step 1: Build Docker image
+  # Step 1: Build Docker image with unique tag (commit SHA)
   - name: 'gcr.io/cloud-builders/docker'
-    args:
-      ['build', '-t', 'gcr.io/$PROJECT_ID/my-app:latest', '.']
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/my-app:$SHORT_SHA', '.']
 
-  # Step 2: Push Docker image
+  # Step 2: Push the tagged image
   - name: 'gcr.io/cloud-builders/docker'
-    args:
-      ['push', 'gcr.io/$PROJECT_ID/my-app:latest']
+    args: ['push', 'gcr.io/$PROJECT_ID/my-app:$SHORT_SHA']
 
   # Step 3: Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -15,7 +13,7 @@ steps:
     args:
       [
         'run', 'deploy', 'my-app',
-        '--image', 'gcr.io/$PROJECT_ID/my-app:latest',
+        '--image', 'gcr.io/$PROJECT_ID/my-app:$SHORT_SHA',
         '--region', 'asia-south1',
         '--allow-unauthenticated'
       ]
@@ -26,32 +24,19 @@ steps:
     args:
       - '-c'
       - |
-        echo "🔗 Connecting to GKE..."
         gcloud container clusters get-credentials my-gke-cluster --region asia-south1 --project $PROJECT_ID
 
-  # Step 5: Apply deployment and service if not already created
+  # Step 5: Deploy new image tag to GKE
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        echo "🧱 Applying manifests (if needed)..."
-        kubectl apply -f k8s/deployment.yaml || true
-        kubectl apply -f k8s/service.yaml || true
-
-  # Step 6: Update the image for deployment `my-app`
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        echo "🚀 Updating deployment image..."
-        kubectl set image deployment/my-app my-app=gcr.io/$PROJECT_ID/my-app:latest
-        echo "⏳ Waiting for rollout..."
+        kubectl set image deployment/my-app my-app=gcr.io/$PROJECT_ID/my-app:$SHORT_SHA
         kubectl rollout status deployment/my-app
 
 images:
-  - 'gcr.io/$PROJECT_ID/my-app:latest'
+  - 'gcr.io/$PROJECT_ID/my-app:$SHORT_SHA'
 
 options:
   default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
