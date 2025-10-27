@@ -36,3 +36,6 @@ steps:
 
 images:
   - 'gcr.io/$PROJECT_ID/my-app:latest'
+
+options:
+  default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
